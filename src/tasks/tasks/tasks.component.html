@@ -1,0 +1,25 @@
+<p>tasks works!</p>
+<div>
+  <h2>Task Manager</h2>
+
+  <!-- Add Task Form -->
+  <div>
+    <input #taskInput placeholder="Add a new task" />
+    <button (click)="addTask(taskInput.value); taskInput.value = ''">
+      Add Task
+    </button>
+  </div>
+
+  <!-- Task List -->
+  <ul>
+    @for (task of tasks$ | async; track $index) {
+    <li>
+      <span [class.completed]="task.completed">{{ task.title }}</span>
+      <button (click)="toggleTaskCompletion(task.id)">
+        {{ task.completed ? "Undo" : "Complete" }}
+      </button>
+      <button (click)="deleteTask(task.id)">Delete</button>
+    </li>
+    }
+  </ul>
+</div>
